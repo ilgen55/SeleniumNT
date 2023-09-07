@@ -3,7 +3,8 @@ package day07_Dropdown_Alert;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import utilities1.TestBase;
+import utilities.TestBase;
+import utilities.TestBase;
 
 public class C03_Alert extends TestBase {
     /*

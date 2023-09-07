@@ -9,6 +9,7 @@ import utilities.TestBase;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class C01_ScreenShot extends TestBase {
@@ -64,6 +65,28 @@ public class C01_ScreenShot extends TestBase {
     public void test05() {
         // amazon sayfasina gidelim
         driver.get("https://facebook.com");
+
+        //sayfanin resmini alalim
+        ekranResmi();
+    }
+
+    @Test
+    public void test06() throws IOException {
+        // amazon sayfasina gidelim
+        driver.get("https://amazon.com");
+
+        //sayfanin resmini alalim
+
+        String tarih= new SimpleDateFormat("_HH_mm_ss_ddMMyyy").format(new Date());
+        String dosyaYolu="target/ekranGoruntusu/amazon"+tarih+"jpeg";
+        TakesScreenshot ts= (TakesScreenshot) driver;
+        FileUtils.copyFile(ts.getScreenshotAs(OutputType.FILE),new File(dosyaYolu));
+    }
+
+    @Test
+    public void test07() {
+        // amazon sayfasina gidelim
+        driver.get("https://amazon.com");
 
         //sayfanin resmini alalim
         ekranResmi();

@@ -4,7 +4,8 @@ import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import utilities1.TestBase;
+import utilities.TestBase;
+
 
 import java.io.File;
 import java.io.IOException;

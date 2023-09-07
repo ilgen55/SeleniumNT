@@ -5,8 +5,10 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
-import utilities1.TestBase;
+import utilities.TestBase;
+import utilities.TestBase;
 
 public class C02_FakerTest extends TestBase {
     @Test

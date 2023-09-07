@@ -1,5 +1,6 @@
 package day14_ScreenShot_ExtenReport;
 
+import com.aventstack.extentreports.ExtentReporter;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
@@ -28,12 +29,12 @@ public class C04_ExtendReport extends TestBase {
             4-ExtentTest class'ından test adımlarına bilgi ekleyebilmemiz için bir obje oluştururuz
          */
         extentReport = new ExtentReports();
-        String tarih = new SimpleDateFormat("_hh_mm_ss_ddMMyyyy").format(new Date());
+        String tarih = new SimpleDateFormat("_HH_mm_ss_ddMMyyyy").format(new Date());
         String dosyaYolu = "target/extentReport/report"+tarih+".html";
         extentHtmlReporter = new ExtentHtmlReporter(dosyaYolu);
         extentReport.attachReporter(extentHtmlReporter);
         //Raporda gözükmesini istediğimiz bilgiler
-        extentReport.setSystemInfo("Tester","Erol");
+        extentReport.setSystemInfo("Tester","Ilgen");
         extentReport.setSystemInfo("Browser","Chrome");
         extentHtmlReporter.config().setDocumentTitle("ExtentReport");
         extentHtmlReporter.config().setReportName("Smoke Test");
@@ -100,6 +101,51 @@ public class C04_ExtendReport extends TestBase {
         extentTest.info("Kullanıcı arama sonucunda çıkan sonuc yazısı webelementinin locat e ini alir");
         webElementResmi(sonucYazisi);
         extentTest.info("Kullanıcı sonuc yazısının resmini alır");
+        extentReport.flush();
+    }
+
+    @Test
+    public void test03() {
+       extentReport=new ExtentReports();
+       String tarih=new SimpleDateFormat("_HH_mm_ss_ddMMyyy").format(new Date());
+       String dosyaYolu="target/extentReport/report"+tarih+".html";
+       extentHtmlReporter=new ExtentHtmlReporter(dosyaYolu);
+       extentReport.attachReporter(extentHtmlReporter);
+
+       extentReport.setSystemInfo("Tester","Ilgen");
+       extentReport.setSystemInfo("Browser","Chorome");
+
+       extentHtmlReporter.config().setDocumentTitle("Test Report");
+       extentHtmlReporter.config().setReportName("Smoke Test");
+
+       extentTest=extentReport.createTest("Amazon Test","Test Raporu");
+
+        //Amazon sayfasına gidelim
+        driver.get("https://amazon.com");
+        extentTest.info("Kullanıcı amazon sayfasına gider");
+
+        //Arama kutusunda iphone aratalim
+        WebElement aramaKutusu = driver.findElement(By.id("twotabsearchtextbox"));
+        extentTest.info("Kullanıcı amazon sayfası arama kutusuna iphne yazar");
+        aramaKutusu.sendKeys("iphone",Keys.ENTER);
+        extentTest.info("Kullanıcı arama kutusunda iphone aratır ");
+        extentReport.flush();
+    }
+
+    @Test
+    public void test04() {
+        rapor("Chorome","Amazon Test");
+        extentTest=extentReport.createTest("Extent Report","Test Raporu");
+
+        //amazon sayfasına gidelim
+        driver.get("https://amazon.com");
+        extentTest.info("Kullanıcı amazon sayfasına gider");
+
+        //arama kutusunda iphone aratalım
+        WebElement aramaKutusu = driver.findElement(By.id("twotabsearchtextbox"));
+        extentTest.info("Arama Kutusu Locate Edildi");
+        aramaKutusu.sendKeys("iphone", Keys.ENTER);
+        extentTest.info("Arama kutusunda Iphone aratildi");
         extentReport.flush();
     }
 }

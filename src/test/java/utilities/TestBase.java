@@ -8,10 +8,7 @@ import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
@@ -42,7 +39,7 @@ public abstract class TestBase {
     @After
     public void tearDown() throws Exception {
         bekle(3);
-        driver.quit();
+       // driver.quit();
     }
 
     //HARD WAIT
@@ -101,8 +98,8 @@ public abstract class TestBase {
 
     //ScreenShot
     public void ekranResmi() {
-        String tarih = new SimpleDateFormat("_hh_mm_ss_ddMMyyyy").format(new Date());
-        String dosyaYolu = "target/ekranGoruntusu/screenShot"+tarih+".png";
+        String tarih = new SimpleDateFormat("_HH_mm_ss_ddMMyyyy").format(new Date());
+        String dosyaYolu = "src/test/java/ekranGoruntuleri/Full"+tarih+".png";
         TakesScreenshot ts = (TakesScreenshot) driver;
         try {
             FileUtils.copyFile(ts.getScreenshotAs(OutputType.FILE),new File(dosyaYolu));
@@ -114,7 +111,7 @@ public abstract class TestBase {
     //WebElement ScreenShot
     public void webElementResmi(WebElement element){
         String tarih = new SimpleDateFormat("_hh_mm_ss_ddMMyyyy").format(new Date());
-        String dosyaYolu = "target/webElementEkranGoruntusu/WEscreenShot"+tarih+".png";
+        String dosyaYolu = "src/test/java/ekranGoruntuleri/WebElement"+tarih+".png";
         try {
             FileUtils.copyFile(element.getScreenshotAs(OutputType.FILE),new File(dosyaYolu));
         } catch (IOException e) {
@@ -135,6 +132,39 @@ public abstract class TestBase {
         extentHtmlReporter.config().setDocumentTitle("ExtentReport");
         extentHtmlReporter.config().setReportName(reportName);
     }
+    // js clik methodu
+
+    public void jsclick( WebElement element ){
+        try {
+            element.click();
+        } catch (Exception e) {
+            JavascriptExecutor js= (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].click();",element);
+            System.out.println("js ile click");
+        }
+
+    }
+    // js scrool webelement
+    public void jsscrool(WebElement element){
+        JavascriptExecutor js= (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);",element);
+    }
+    //JS scrollToEnd
+    public void jsScrollEnd(){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0,document.body.scrollHeight)");
+    }
+    //JS scrollToHome
+    public void jsScrollHome(){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0,-document.body.scrollHeight)");
+    }
+    // js sendKeys
+    public void jsSendKeys(WebElement webelement,String value){
+        JavascriptExecutor js= (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].value='"+value+"'",webelement);
+    }
+
 
 }
 

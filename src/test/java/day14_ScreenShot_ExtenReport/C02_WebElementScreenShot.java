@@ -82,4 +82,38 @@ public class C02_WebElementScreenShot extends TestBase {
         FileUtils.copyFile(sonucYazisi.getScreenshotAs(OutputType.FILE),new File(dosyaYolu1));
 
     }
+
+    @Test
+    public void test05() throws IOException {
+        //Amazon sayfasına gidelim
+        driver.get("https://amazon.com");
+        //Arama kutusunda iphone aratalim
+        WebElement aramaKutusu= driver.findElement(By.xpath("//*[@id='twotabsearchtextbox']"));
+        aramaKutusu.sendKeys("iphone", Keys.ENTER);
+        //ekran resmini alalım
+        ekranResmi();
+
+        //sonuc yazısı webelementinin resmini alalım
+         String tarih=new SimpleDateFormat("_HH_mm_ss_ddMMyyy").format(new Date());
+         String dosyaYolu="src/test/java/utilities/ekranGörüntüleri"+tarih+"jpeg";
+        WebElement sonucYazisi= driver.findElement(By.xpath("(//*[@class='a-section a-spacing-small a-spacing-top-small'])[1]"));
+        TakesScreenshot ts= (TakesScreenshot) driver;
+        FileUtils.copyFile(sonucYazisi.getScreenshotAs(OutputType.FILE),new File(dosyaYolu));
+    }
+
+    @Test
+    public void test06() {
+        //Amazon sayfasına gidelim
+        driver.get("https://amazon.com");
+        //Arama kutusunda iphone aratalim
+        WebElement aramaKutusu= driver.findElement(By.xpath("//*[@id='twotabsearchtextbox']"));
+        aramaKutusu.sendKeys("iphone", Keys.ENTER);
+        //ekran resmini alalım
+        ekranResmi();
+
+        //sonuc yazısı webelementinin resmini alalım
+        WebElement sonucYazisi= driver.findElement(By.xpath("(//*[@class='a-section a-spacing-small a-spacing-top-small'])[1]"));
+        webElementResmi(sonucYazisi);
+
+    }
 }

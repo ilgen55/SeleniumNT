@@ -9,6 +9,38 @@ import java.util.List;
 
 public class C02_WebTable extends TestBase {
     @Test
+    public void test02() {
+        //https://the-internet.herokuapp.com/tables sayfasına gidelim
+        driver.get("https://the-internet.herokuapp.com/tables");
+
+        //Task 1 : Table1’i print edin
+        WebElement table1= driver.findElement(By.xpath("(//table)[1]"));
+        System.out.println("tablo 1 : "+table1.getText());
+        System.out.println("*******************************************");
+
+        //Task 2 : 3. Row' datalarını print edin
+        WebElement row3= driver.findElement(By.xpath("(//table//tr)[4]"));
+        System.out.println(" ucuncu satır : "+ row3.getText());
+        System.out.println("**********************************************");
+
+        // Task 3 : Son row daki dataları print edin
+        WebElement sonRow= driver.findElement(By.xpath("(//table//tr)[last()]"));
+        System.out.println("son satır : "+sonRow.getText());
+
+        //Task 4 : 5. Column datalarini print edin
+        WebElement culumnBes= driver.findElement(By.xpath("(//*[@class='header'])[5]"));
+        System.out.println("sutun bes : "+culumnBes.getText());
+
+       List<WebElement> columnBesDatalari= driver.findElements(By.xpath("(//tbody)[1]//td[5]"));
+       columnBesDatalari.forEach(t-> System.out.println(t.getText()));
+
+
+
+
+
+    }
+
+    @Test
     public void test01() {
         /*
      Eğer bir sayfada içinde dataların bulunduğu bir tablo ile karşılaşırsak;
@@ -54,6 +86,7 @@ public class C02_WebTable extends TestBase {
         printData(2,3);
     }
 
+
     private void printData(int satir, int sutun) {
         System.out.println("**************************************");
         WebElement satirSutun= driver.findElement(By.xpath("(//tbody)[1]//tr["+satir+"]//td["+sutun+"]"));
@@ -64,4 +97,6 @@ public class C02_WebTable extends TestBase {
     3. Satırdaki 1. ve 2. sütun bilgilerini yazdırınız. //-->position()>=1 and position()<=2
  */
     }
+
+
 }
